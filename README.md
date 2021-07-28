@@ -155,7 +155,44 @@ Nevertheless, we used the LSTM model to predict the opening price of the next da
 </p>
 
 ## Conclusion and other improvements
+### Conclusion
+Our answer to the question is apparent: Given our constraints, we have found that an LSTM model with the following architecture yields the most accurate predictions:
 
+- CuDNNLSTM layer with 256 neurons
+- Dropout layer with a 0.4 dropout rate
+- Flatten layer
+- Dense layer with 512 neurons
+- Dropout layer with a 0.4 dropout rate
+- The final Dense layer with 1 output neuron
 
+### Testing the LSTM on other Companies
+We decided to test the best performing model on the stock prices of other randomly selected companies to see if it could recognise their patterns as well. The results are shown in the report.
 
+### Day High and Low
+As the model’s predictions of the opening price is not accurate enough for practical use in the stock market, we have decided to try using it to predict the day high and low instead, which, given the insufficient accuracy, would be more useful as it would help a stock trader decide when to buy and sell more, as the price approaches the predicted day high or low.
 
+We used the architecture of the best performing LSTM model as discussed above and trained 2 separate models to predict the high and low prices respectively. Predictions after training are also shown in the report.
+
+#### Predictions
+Next, we trained a model with 20 outputs for the high and low prices of the next 10 days based on the architecture of the best performing LSTM model mentioned above. It had quite a high loss of 0.0031. We unscaled the values using the above discussed function, and the following prices were obtained:
+
+|No|High|Low|
+|--|--|--|
+|0|302.169800|293.899261|
+|1|296.907776|293.083130|
+|2|292.739288|295.500458|
+|3|296.282959|294.505859|
+|4|303.337860|294.262360|
+|5|299.599915|291.348450|
+|6|300.364197|297.488983|
+|7|297.884888|290.553009|
+|8|301.414459|296.423737|
+|9|205.891571|290.927673|
+
+<p align="center">
+  <b>Table 5</b>: Predictions for next 10 days on Netflix
+</p>
+
+Of course, as the amount of output neurons has increased its accuracy would definitely be affected, and the optimal model would probably require a larger neural network.
+
+Word count: **2123** (including titles)
