@@ -123,4 +123,39 @@ LSTM-512-3-0.4-512-1568464262         0.0012397152696982684
 
 It is obvious that the model with 256 neurons in its LSTM layers, 1 LSTM layer, a 0.4 dropout rate and 512 neurons in its final Dense layer performed the best in the test set.
 
+## Unscaling and Comparing the Prices
+
+For the stock predictions to be useful, they must of course be unscaled to obtain the actual prices. We have thus implemented a function, unscale_price, which basically takes the same MinMaxScaler used to scale the data, obtains the x<sub>min</sub> and xmax stored in the class, and uses those values to unscale the data.
+
+Now that the actual prices have been obtained, the predictions can be compared with the actual price to see the actual error of the model in terms of money.
+
+Here are the first five rows of the actual price predictions:
+
+|Date|Predicted|Actual|
+|--|--|--|
+|2015-03-27|58.167995|59.330002|
+|2015-03-30|57.471416|59.715714|
+|2015-03-31|57.224842|60.110001|
+|2015-04-01|57.108532|59.642857|
+|2015-04-02|56.827667|59.071430|
+
+<p align="center">
+  <b>Table 4</b>: Sample Predictions on Netflix data
+</p>
+
+As you can see, the model has an error of around a few dollars. The mean absolute error of all the predictions is calculated to be around $4.204.
+
+Unfortunately, this is too high and definitely not practical in stock trading.
+
+### Tomorrow’s Opening Price
+
+Nevertheless, we used the LSTM model to predict the opening price of the next day (21/09/19), which was unscaled and yielded:
+<p align="center">
+  <b>$287.181</b>
+</p>
+
+## Conclusion and other improvements
+
+
+
 
